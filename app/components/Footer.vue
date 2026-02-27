@@ -2,7 +2,7 @@
   <div>
     <hr>
     <footer>
-      <p>© 2026 My Nuxt App</p>
+      <p>Desarrollado por CENDITEL</p>
     </footer>
   </div>
 </template>

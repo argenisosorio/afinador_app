@@ -10,7 +10,7 @@ const goBack = () => {
 
 <template>
   <button class="btn-back" @click="goBack">
-    ⬅ Go back
+    ⬅ Volver
   </button>
 </template>
 
