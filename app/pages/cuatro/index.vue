@@ -1,7 +1,6 @@
 <template>
   <div>
-    <GoBack />
-    <h1>Cuatro Venezolano</h1>
+    <h1><GoBack />Cuatro Venezolano</h1>
   </div>
 </template>
 

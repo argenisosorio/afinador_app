@@ -9,13 +9,17 @@ const goBack = () => {
 </script>
 
 <template>
-  <button class="btn-back" @click="goBack">
-    ⬅ Volver
-  </button>
+    <a href="#" @click.prevent="goBack" class="btn-back">
+      <font-awesome-icon icon="fa-solid fa-arrow-left" />
+    </a>
 </template>
 
 <style scoped>
 .btn-back {
-  background-color: #f3f4f6;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  color: #000000;
+  border-radius: 0.375rem;
+  text-decoration: none;
 }
 </style>
