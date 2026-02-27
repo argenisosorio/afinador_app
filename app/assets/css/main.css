@@ -1,0 +1,7 @@
+/* Importamos Bootstrap desde node_modules */
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+/* Aquí puedes agregar tus propios estilos globales después */
+body {
+  background-color: #FAFAFA;
+}
