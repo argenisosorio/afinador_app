@@ -9,7 +9,7 @@ const goBack = () => {
 </script>
 
 <template>
-    <a href="#" @click.prevent="goBack" class="btn-back">
+    <a href="#" class="btn-back" @click.prevent="goBack">
       <font-awesome-icon icon="fa-solid fa-arrow-left" />
     </a>
 </template>

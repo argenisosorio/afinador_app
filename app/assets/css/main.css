@@ -5,3 +5,171 @@
 body {
   background-color: #FAFAFA;
 }
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.tuner-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 0 auto 20px;
+    border: ridge 1px red;
+    background-color: green;
+}
+
+.frequency-display {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 56px;
+    font-weight: bold;
+    color: #2d3349;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: 'Courier New', monospace;
+    border: ridge 1px blue;
+}
+
+.unit {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    color: #718096;
+    letter-spacing: 2px;
+    border: ridge 1px green;
+}
+
+.note-name {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 48px;
+    font-weight: bold;
+    color: rgba(102, 126, 234, 0.2);
+    text-transform: uppercase;
+    z-index: 1;
+    border: ridge 1px orange;
+}
+
+.tuning-status {
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 50px;
+    background: #48bb78;
+    color: white;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    border: ridge 1px yellow;
+}
+
+.btn-primary, .btn-secondary, .btn-success, .btn-json {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
+    color: white;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+    color: white;
+}
+
+.btn-json {
+    background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+    color: white;
+    width: 100%;
+    justify-content: center;
+}
+
+.btn-random {
+    background: linear-gradient(135deg, #ed64a6 0%, #d53f8c 100%);
+}
+
+.btn-primary:hover, .btn-secondary:hover, .btn-success:hover, .btn-json:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary:active, .btn-secondary:active, .btn-success:active, .btn-json:active {
+    transform: translateY(0);
+}
+
+.json-data-panel {
+    background: #f7fafc;
+    border-radius: 20px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.json-data-panel h3 {
+    color: #2d3748;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.json-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+    
+    .tuner-container {
+        width: 300px;
+        height: 300px;
+    }
+    
+    .frequency-display {
+        font-size: 42px;
+    }
+    
+    .note-name {
+        font-size: 36px;
+    }
+    
+    .controls {
+        flex-direction: column;
+    }
+    
+    .btn-primary, .btn-secondary, .btn-success {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .data-info {
+        grid-template-columns: 1fr;
+    }
+}
