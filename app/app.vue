@@ -16,11 +16,3 @@
 */
 const loader = useState('loader', () => false)
 </script>
-
-<style>
-a {
-  color: red;
-  text-decoration: none;
-  font-weight: bold;
-}
-</style>

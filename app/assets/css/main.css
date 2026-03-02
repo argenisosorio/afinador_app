@@ -3,26 +3,74 @@
 
 /* Aquí puedes agregar tus propios estilos globales después */
 body {
-  background-color: #FAFAFA;
+    background-color: #FAFAFA;
 }
 
-header {
+.poc-wrapper {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.poc-container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 30px;
+    padding: 30px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+    max-width: 700px;
+    width: 100%;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.poc-container header {
     text-align: center;
     margin-bottom: 30px;
+}
+
+.header-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.poc-container h1 {
+    color: #2d3349;
+    font-size: 2.2em;
+    margin-bottom: 5px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.poc-container .subtitle {
+    color: #4a5568;
+    font-size: 1.1em;
+    font-weight: 500;
 }
 
 .tuner-container {
     position: relative;
     width: 400px;
-    height: 400px;
+    height: 480px;
     margin: 0 auto 20px;
-    border: ridge 1px red;
-    background-color: green;
+}
+
+.tuner-container canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
 }
 
 .frequency-display {
     position: absolute;
-    top: 55%;
+    top: 76%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 56px;
@@ -30,18 +78,15 @@ header {
     color: #2d3349;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     font-family: 'Courier New', monospace;
-    border: ridge 1px blue;
+    white-space: nowrap;
 }
 
-.unit {
-    position: absolute;
-    top: 65%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 18px;
+.unit-text {
+    font-size: 24px;
     color: #718096;
-    letter-spacing: 2px;
-    border: ridge 1px green;
+    letter-spacing: 1px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-left: 2px;
 }
 
 .note-name {
@@ -54,12 +99,11 @@ header {
     color: rgba(102, 126, 234, 0.2);
     text-transform: uppercase;
     z-index: 1;
-    border: ridge 1px orange;
 }
 
 .tuning-status {
     position: absolute;
-    bottom: 20%;
+    top: 90%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 18px;
@@ -70,10 +114,61 @@ header {
     color: white;
     white-space: nowrap;
     transition: all 0.3s ease;
-    border: ridge 1px yellow;
 }
 
-.btn-primary, .btn-secondary, .btn-success, .btn-json {
+.note-indicator {
+    margin: 30px 0;
+    padding: 20px;
+    background: #f7fafc;
+    border-radius: 20px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.note-scale {
+    position: relative;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+}
+
+.needle-position {
+    position: absolute;
+    transform: translateX(-50%);
+    font-size: 30px;
+    color: #667eea;
+    transition: left 0.3s ease;
+    text-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
+}
+
+.frequency-range {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    color: #718096;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.frequency-range .target {
+    color: #667eea;
+    font-weight: bold;
+    position: relative;
+}
+
+.frequency-range .target::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 10px;
+    background: #667eea;
+}
+
+.btn-json {
     padding: 12px 24px;
     border: none;
     border-radius: 50px;
@@ -85,24 +180,6 @@ header {
     align-items: center;
     gap: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.btn-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-}
-
-.btn-secondary {
-    background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
-    color: white;
-}
-
-.btn-success {
-    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
-    color: white;
-}
-
-.btn-json {
     background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
     color: white;
     width: 100%;
@@ -113,13 +190,9 @@ header {
     background: linear-gradient(135deg, #ed64a6 0%, #d53f8c 100%);
 }
 
-.btn-primary:hover, .btn-secondary:hover, .btn-success:hover, .btn-json:hover {
+.btn-json:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-}
-
-.btn-primary:active, .btn-secondary:active, .btn-success:active, .btn-json:active {
-    transform: translateY(0);
 }
 
 .json-data-panel {
@@ -142,34 +215,42 @@ header {
     margin-bottom: 20px;
 }
 
+.json-input textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e2e8f0;
+    border-radius: 15px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    resize: vertical;
+    background: white;
+    transition: border-color 0.3s;
+}
+
+.json-input textarea:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
 @media (max-width: 600px) {
-    .container {
+    .poc-wrapper {
         padding: 20px;
     }
-    
+
     .tuner-container {
         width: 300px;
-        height: 300px;
+        height: 360px;
     }
-    
+
     .frequency-display {
         font-size: 42px;
     }
-    
+
+    .unit-text {
+        font-size: 18px;
+    }
+
     .note-name {
         font-size: 36px;
-    }
-    
-    .controls {
-        flex-direction: column;
-    }
-    
-    .btn-primary, .btn-secondary, .btn-success {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .data-info {
-        grid-template-columns: 1fr;
     }
 }
