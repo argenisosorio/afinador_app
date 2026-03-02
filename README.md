@@ -1,4 +1,4 @@
-<h1>Nuxt</h1>
+<h1>Afinador de Cuerdas Automático</h1>
 
 .....
 
