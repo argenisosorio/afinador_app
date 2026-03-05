@@ -2,37 +2,80 @@
 
 .....
 
-<h2>Prerequisites</h2>
+<h2>Prerrequisitos</h2>
 
 ```
 Node.js >= v20.20.0
 npm
+Python 3.12.X
+FastAPI
 ```
 
-<h3>Frontend Setup (Nuxt)</h3>
+<h3>Configuración del Backend (FastAPI)</h3>
 
-Open a new terminal and navigate to frontend directory
+Crear un entorno virtual con Python 3:
+
+```
+$ sudo apt install python3-venv
+```
+
+Crear el entorno virtual:
+
+```
+$ python3 -m venv FastAPI
+```
+
+Activar el entorno virtual:
+
+```
+$ source FastAPI/bin/activate
+```
+
+Instalación de fastapi dentro del entorno virtual:
+
+```
+(FastAPI) $ pip install "fastapi[standard]"
+```
+
+Abre una nueva terminal y navega al directorio del afinador_app/FastAPI:
+
+```
+$ cd FastAPI
+```
+
+Ejecuta el servidor de FastAPI:
+
+```
+$ fastapi dev main.py
+```
+
+Prueba tu API, Una vez que el servidor esté corriendo, puedes ver los resultados
+en http://127.0.0.1:8000. Verás el JSON.
+
+<h3>Configuración del Frontend (Nuxt)</h3>
+
+Abre una nueva terminal y navega al directorio del afinador_app:
 
 ```
 $ cd afinador_app
 ```
 
-Install Node.js dependencies
+Instala las dependencias de Node.js:
 
 ```
 $ npm install
 ```
 
-Create your local settings file
+Crea tu archivo de configuración local:
 
 ```
 $ cp .env_example .env
 ```
 
-Start the Nuxt development server
+Inicia el servidor de desarrollo de Nuxt:
 
 ```
 $ npm run dev
 ```
 
-The Nuxt application will be available at http://localhost:3000/
+La aplicación Nuxt estará disponible en http://localhost:3000/
