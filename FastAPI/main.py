@@ -15,7 +15,7 @@ app.add_middleware(
 def read_root():
     return {
         "guitar_tuner": {
-            "frequency": 230.0,
+            "frequency": 220.0,
             "note": "A",
             "octave": 3,
             "accuracy": 0.87

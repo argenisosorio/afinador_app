@@ -52,7 +52,7 @@ const apiBase = config.public.apiBase
 
 // --- ESTADO REACTIVO ---
 const tunerCanvas = ref(null)
-const currentFrequency = ref(220)
+const currentFrequency = ref(210)
 const jsonText = ref('')
 
 const tunerConfig = {
@@ -189,23 +189,22 @@ const updateFrequency = (freq) => {
 // Función para obtener datos del endpoint de FastAPI.
 const fetchTunerData = async () => {
   try {
-    // Realiza la petición al endpoint de FastAPI
-    const { data, error } = await useFetch(`${apiBase}/`)
+    // CAMBIO: Usamos $fetch en lugar de useFetch
+    // $fetch devuelve los datos directamente, no un objeto { data, error }
+    const response = await $fetch(`${apiBase}/`)
 
-    if (error.value) {
-      console.error('Error al conectar con la API:', error.value)
-      console.log('Error al conectar con FastAPI. Revisa el CORS.')
-      return
-    }
-
-    if (data.value) {
+    if (response) {
       // Actualiza el editor de texto y la frecuencia
-      jsonText.value = JSON.stringify(data.value, null, 2)
-      const freq = data.value.guitar_tuner?.frequency || data.value.frequency
+      jsonText.value = JSON.stringify(response, null, 2)
+
+      // Accedemos directamente a la respuesta
+      const freq = response.guitar_tuner?.frequency || response.frequency
       if (freq) updateFrequency(freq)
     }
   } catch (e) {
-    console.error('Error en fetch:', e)
+    // Los errores en $fetch se capturan en el catch
+    console.error('Error al conectar con la API:', e)
+    console.log('Error al conectar con FastAPI. Revisa el CORS o la conexión.')
   }
 }
 
