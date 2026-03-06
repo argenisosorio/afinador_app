@@ -22,15 +22,27 @@ tuner_data = {
 }
 
 async def update_frequency():
-    """Tarea en segundo plano que actualiza la frecuencia cada 2 segundos"""
-    while True:
-        # Generamos el valor random entre 210 y 230
-        tuner_data["frequency"] = round(random.uniform(210, 230), 2)
-        # Opcional: podrías actualizar el accuracy también para que se vea real
-        tuner_data["accuracy"] = round(random.uniform(0.8, 0.99), 2)
+    """Tarea en segundo plano que incrementa la frecuencia de 2 en 2"""
+    # Inicializamos en 210
+    tuner_data["frequency"] = 210.0
 
-        # Esperamos 2 segundos antes de la próxima actualización
-        await asyncio.sleep(2)
+    while True:
+        # Esperamos 0.5 segundo antes de la siguiente actualización
+        await asyncio.sleep(0.5)
+
+        # Calculamos el siguiente valor sumando 5
+        nueva_frecuencia = tuner_data["frequency"] + 2
+
+        # Si supera los 230, reiniciamos a 210
+        if nueva_frecuencia > 230:
+            tuner_data["frequency"] = 210.0
+        else:
+            tuner_data["frequency"] = nueva_frecuencia
+
+        # Opcional: actualizar el accuracy para que varíe un poco
+        tuner_data["accuracy"] = round(random.uniform(0.9, 0.99), 2)
+
+        print(f"Frecuencia actualizada: {tuner_data['frequency']}") # Debug en consola
 
 # Decoramos la función de inicio para que se ejecute al arrancar el servidor
 @app.on_event("startup")

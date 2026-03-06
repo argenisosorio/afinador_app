@@ -19,23 +19,6 @@
           {{ tuningStatusText }}
         </div>
       </div>
-
-      <div class="json-data-panel">
-        <div class="json-input">
-          <!-- Botones para cargar datos -->
-          <button
-            class="btn-json"
-            style="background: #667eea"
-            @click="fetchTunerData"
-          >
-            Cargar de API
-          </button>
-          <button class="btn-json btn-random" @click="generateRandomFrequency">
-            Generar aleatorio
-          </button>
-          <!-- Final de Botones para cargar datos -->
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -210,18 +193,13 @@ const fetchTunerData = async () => {
   }
 }
 
-const generateRandomFrequency = () => {
-  const randomFreq = tunerConfig.minFrequency + (Math.random() * (tunerConfig.maxFrequency - tunerConfig.minFrequency))
-  updateFrequency(randomFreq)
-}
-
 // Inicialización
 onMounted(() => {
   drawTunerMeter(currentFrequency.value)
   // Carga automática inicial de fetchTunerData
   fetchTunerData()
-  // Iniciamos el ciclo de 1 segundo
-  timer = setInterval(fetchTunerData, 1000);
+  // Iniciamos el ciclo de 0.5 segundos para actualizar la frecuencia
+  timer = setInterval(fetchTunerData, 500);
 })
 
 onUnmounted(() => {
