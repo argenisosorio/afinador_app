@@ -41,10 +41,12 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed, watch } from 'vue'
+import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
 
 // Título de la página
 useHead({ title: 'Cuatro Venezolano' })
+
+let timer = null;
 
 // Configuración de API (NUXT_PUBLIC_API_BASE en .env)
 const config = useRuntimeConfig()
@@ -216,6 +218,14 @@ const generateRandomFrequency = () => {
 // Inicialización
 onMounted(() => {
   drawTunerMeter(currentFrequency.value)
-  fetchTunerData() // Carga automática inicial
+  // Carga automática inicial de fetchTunerData
+  fetchTunerData()
+  // Iniciamos el ciclo de 1 segundo
+  timer = setInterval(fetchTunerData, 1000);
 })
+
+onUnmounted(() => {
+  // Limpiamos el intervalo al salir del componente
+  if (timer) clearInterval(timer);
+});
 </script>
