@@ -8,4 +8,7 @@
 </template>
 
 <style scoped>
+* {
+  color: #ffffff;
+}
 </style>

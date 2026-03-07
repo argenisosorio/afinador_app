@@ -1,10 +1,38 @@
 /* Importamos Bootstrap desde node_modules */
 @import "bootstrap/dist/css/bootstrap.min.css";
 
-/* Aquí puedes agregar tus propios estilos globales después */
 body {
-    background-color: #FAFAFA;
+    background-color: #201512;
 }
+
+/* Estilos personalizados de Bootsstrap para el PoC de afinador de guitarra */
+
+.bg-light {
+    background-color: #201512 !important;
+    border-bottom: 1px solid #613529 !important;
+}
+
+.color-orange-app {
+    color: #e07d61 !important;
+}
+
+.main-card {
+    background: #201512;
+    border: ridge 1px #613529;
+}
+
+.note-icon-main {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.btn-start-main {
+    background-color: #613529;
+    border: none;
+    border-radius: 10px;
+}
+
+/* Estilos del medidor de frecuencia */
 
 .poc-wrapper {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
