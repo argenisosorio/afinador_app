@@ -12,6 +12,10 @@ body {
     border-bottom: 1px solid #613529 !important;
 }
 
+.color-background-app {
+    color: #201512 !important;
+}
+
 .color-orange-app {
     color: #e07d61 !important;
 }
@@ -41,6 +45,19 @@ body {
 }
 
 .btn-start-main:hover {
+    background-color: #ffffff;
+    color: #201512;
+    border: none;
+    border-radius: 10px;
+}
+
+.btn-chords {
+    background-color: #e07d61;
+    border: none;
+    border-radius: 10px;
+}
+
+.btn-chords:hover {
     background-color: #ffffff;
     color: #201512;
     border: none;

@@ -8,16 +8,18 @@
         <h1 class="text-white"><b>A-CORD-E</b></h1>
         <h4 class="text-lightgray mt-4">Afinador de Instrumentos de Cuerdas</h4>
         <!-- Botón para entrar al menú -->
-        <button
-          type="button"
-          class="btn btn-primary btn-lg btn-start-main mt-4 mb-5"
-        >
-          <font-awesome-icon
-            icon="fa-solid fa-hand-pointer"
-            class="color-orange-app"
-          />
-          <b>Presiona <span class="color-orange-app">1</span> para iniciar</b>
-        </button>
+        <NuxtLink to="/cuerdas" class="navbar-brand">
+          <button
+            type="button"
+            class="btn btn-primary btn-lg btn-start-main mt-4 mb-4"
+          >
+            <font-awesome-icon
+              icon="fa-solid fa-hand-pointer"
+              class="color-orange-app"
+            />
+            <b>Presiona <span class="color-orange-app">1</span> para iniciar</b>
+          </button>
+        </NuxtLink>
         <!-- Final del botón para entrar al menú -->
       </div>
     </div>

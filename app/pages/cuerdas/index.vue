@@ -27,13 +27,11 @@
               <!-- Botón para entrar al 2do menú -->
               <button
                 type="button"
-                class="btn btn-primary btn-lg btn-start-main mt-2 mb-2"
+                class="btn btn-primary btn-lg btn-chords mt-2 mb-2"
               >
-                <font-awesome-icon
-                  icon="fa-solid fa-hand-pointer"
-                  class="color-orange-app"
-                />
-                Presiona <span class="color-orange-app"><b>4</b></span>
+                <span class="color-background-app">
+                  <b>Presiona 4</b>
+                </span>
               </button>
               <!-- Final del botón para entrar al 2do menú -->
             </div>
@@ -52,13 +50,11 @@
               <!-- Botón para entrar al 2do menú -->
               <button
                 type="button"
-                class="btn btn-primary btn-lg btn-start-main mt-2 mb-2"
+                class="btn btn-primary btn-lg btn-chords mt-2 mb-2"
               >
-                <font-awesome-icon
-                  icon="fa-solid fa-hand-pointer"
-                  class="color-orange-app"
-                />
-                Presiona <span class="color-orange-app"><b>6</b></span>
+                <span class="color-background-app">
+                  <b>Presiona 6</b>
+                </span>
               </button>
               <!-- Final del botón para entrar al 2do menú -->
             </div>
@@ -77,13 +73,11 @@
               <!-- Botón para entrar al 2do menú -->
               <button
                 type="button"
-                class="btn btn-primary btn-lg btn-start-main mt-2 mb-2"
+                class="btn btn-primary btn-lg btn-chords mt-2 mb-2"
               >
-                <font-awesome-icon
-                  icon="fa-solid fa-hand-pointer"
-                  class="color-orange-app"
-                />
-                Presiona <span class="color-orange-app"><b>8</b></span>
+                <span class="color-background-app">
+                  <b>Presiona 8</b>
+                </span>
               </button>
               <!-- Final del botón para entrar al 2do menú -->
             </div>

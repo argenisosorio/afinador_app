@@ -2,14 +2,14 @@
   <div class="mb-3">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
-        <a class="navbar-brand" href="/">
+        <NuxtLink to="/" class="navbar-brand">
           <span class="color-orange-app">
             <font-awesome-icon icon="fa-solid fa-music" />
           </span>
           <span class="text-white">
             Afinador de Instrumentos
           </span>
-        </a>
+        </NuxtLink>
         <button
           class="navbar-toggler"
           type="button"
