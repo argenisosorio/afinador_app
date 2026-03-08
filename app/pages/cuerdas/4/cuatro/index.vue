@@ -27,7 +27,7 @@
 import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
 
 // Título de la página
-useHead({ title: 'Cuatro Venezolano' })
+useHead({ title: 'Cuatro' })
 
 let timer = null;
 
@@ -174,7 +174,6 @@ const updateFrequency = (freq) => {
 // Función para obtener datos del endpoint de FastAPI.
 const fetchTunerData = async () => {
   try {
-    // CAMBIO: Usamos $fetch en lugar de useFetch
     // $fetch devuelve los datos directamente, no un objeto { data, error }
     const response = await $fetch(`${apiBase}/`)
 
@@ -183,7 +182,7 @@ const fetchTunerData = async () => {
       jsonText.value = JSON.stringify(response, null, 2)
 
       // Accedemos directamente a la respuesta
-      const freq = response.guitar_tuner?.frequency || response.frequency
+      const freq = response.data?.frequency || response.frequency
       if (freq) updateFrequency(freq)
     }
   } catch (e) {

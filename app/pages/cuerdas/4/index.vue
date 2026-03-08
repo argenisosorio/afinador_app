@@ -3,107 +3,94 @@
     <div class="text-center">
       <h1 class="text-center text-white mt-4 mb-4">
         <b>
-          ¿Cuántas <span class="color-orange-app">cuerdas</span> tiene tu
-          instrumento?
+          4 cuerdas
         </b>
       </h1>
-      <h4 class="text-lightgray mt-4 mb-4">
-        Selecciona el número de cuerdas para afinar tu instrumento musical
-      </h4>
     </div>
     <div class="container">
       <!-- Columnas para mostrar las opciones de cuerdas -->
       <div class="row">
         <div class="col-4 col-sm-4">
+          <!-- Cuatro -->
           <div class="card main-card">
             <div class="card-body text-center text-white">
               <img
-                src="/images/cuerdas/4.png"
+                src="/images/cuerdas/4/cuatro.png"
                 alt="star"
                 class="img-fluid mt-3 mb-3"
                 width="200px"
               >
-              <h4><b>4 Cuerdas</b></h4>
+              <h4><b>Cuatro</b></h4>
               <!-- Botón para entrar al 2do menú -->
-              <NuxtLink to="/cuerdas/4" class="navbar-brand">
+              <NuxtLink to="/cuerdas/4/cuatro" class="navbar-brand">
                 <button
                   type="button"
                   class="btn btn-primary btn-lg btn-chords mt-2 mb-2"
                 >
                   <span class="color-background-app">
-                    <b>Presiona 4</b>
+                    <b>Presiona 1</b>
                   </span>
                 </button>
               </NuxtLink>
               <!-- Final del botón para entrar al 2do menú -->
             </div>
           </div>
+          <!-- Final de Cuatro -->
         </div>
         <div class="col-4 col-sm-4">
+          <!-- Ukelele -->
           <div class="card main-card">
             <div class="card-body text-center text-white">
               <img
-                src="/images/cuerdas/6.png"
+                src="/images/cuerdas/4/ukelele.png"
                 alt="star"
                 class="img-fluid mt-3 mb-3"
                 width="200px"
               >
-              <h4><b>6 Cuerdas</b></h4>
+              <h4><b>Ukelele</b></h4>
               <!-- Botón para entrar al 2do menú -->
-              <NuxtLink to="/cuerdas/6" class="navbar-brand">
+              <NuxtLink to="/cuerdas/4/ukelele" class="navbar-brand">
                 <button
                   type="button"
                   class="btn btn-primary btn-lg btn-chords mt-2 mb-2"
                 >
                   <span class="color-background-app">
-                    <b>Presiona 6</b>
+                    <b>Presiona 2</b>
                   </span>
                 </button>
               </NuxtLink>
               <!-- Final del botón para entrar al 2do menú -->
             </div>
           </div>
+          <!-- Final de Ukelele -->
         </div>
         <div class="col-4 col-sm-4">
+          <!-- Banjo -->
           <div class="card main-card">
             <div class="card-body text-center text-white">
               <img
-                src="/images/cuerdas/8.png"
+                src="/images/cuerdas/4/banjo.png"
                 alt="star"
                 class="img-fluid mt-3 mb-3"
                 width="200px"
               >
-              <h4><b>8 Cuerdas</b></h4>
+              <h4><b>Banjo</b></h4>
               <!-- Botón para entrar al 2do menú -->
-              <NuxtLink to="/cuerdas/8" class="navbar-brand">
+              <NuxtLink to="/cuerdas/4/banjo" class="navbar-brand">
                 <button
                   type="button"
                   class="btn btn-primary btn-lg btn-chords mt-2 mb-2"
                 >
                   <span class="color-background-app">
-                    <b>Presiona 8</b>
+                    <b>Presiona 3</b>
                   </span>
                 </button>
               </NuxtLink>
               <!-- Final del botón para entrar al 2do menú -->
             </div>
           </div>
+          <!-- Final de Banjo -->
         </div>
-      </div>
-      <!-- Final de las columnas para mostrar las opciones de cuerdas -->
-      <div class="text-center mt-2">
-        <!-- Botón para entrar al menú -->
-        <button
-          type="button"
-          class="btn btn-primary btn-lg btn-start-main mt-4 mb-5 "
-        >
-          <font-awesome-icon
-            icon="fa-solid fa-hand-pointer"
-            class="color-orange-app"
-          />
-          <b>Presiona <span class="color-orange-app">4, 5 o 8</span> en tu teclado</b>
-        </button>
-        <!-- Final del botón para entrar al menú -->
       </div>
     </div>
   </div>
@@ -113,7 +100,7 @@
 import { onMounted, onUnmounted } from 'vue'
 
 // Título de la página
-useHead({title: 'Cuerdas'})
+useHead({title: '4 Cuerdas'})
 
 // Configuración de API (NUXT_PUBLIC_API_BASE en .env)
 const config = useRuntimeConfig()
@@ -129,12 +116,12 @@ const readAPI = async () => {
     // $fetch devuelve los datos directamente, no un objeto { data, error }
     const response = await $fetch(`${apiBase}/`)
 
-    if (response.data.order === 14) {
-      navigateTo('/cuerdas/4')
-    } if (response.data.order === 16) {
-      navigateTo('/cuerdas/6')
-    } if (response.data.order === 18) {
-      navigateTo('/cuerdas/8')
+    if (response.data.order === 141) {
+      navigateTo('/cuerdas/4/cuatro')
+    } if (response.data.order === 142) {
+      navigateTo('/cuerdas/4/ukelele')
+    } if (response.data.order === 143) {
+      navigateTo('/cuerdas/4/banjo')
     } if (response.data.order === 0 || response.data.order === '') {
       navigateTo('/')
     } else {

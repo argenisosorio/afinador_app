@@ -51,6 +51,19 @@ body {
     border-radius: 10px;
 }
 
+.btn-start-reload {
+    background-color: #613529;
+    border: none;
+    border-radius: 10px;
+}
+
+.btn-start-reload:hover {
+    background-color: #ffffff;
+    color: #201512 !important;
+    border: none;
+    border-radius: 10px;
+}
+
 .btn-chords {
     background-color: #e07d61;
     border: none;

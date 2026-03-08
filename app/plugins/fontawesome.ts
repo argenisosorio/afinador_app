@@ -5,7 +5,8 @@ import {
   faHouse,
   faArrowLeft,
   faMusic,
-  faHandPointer
+  faHandPointer,
+  faArrowRotateRight
 } from '@fortawesome/free-solid-svg-icons' // Importa los iconos que necesites
 
 // Esto evita que FontAwesome inserte su propio CSS automáticamente, 
@@ -13,7 +14,7 @@ import {
 config.autoAddCss = false
 
 // Añade los iconos a la librería
-library.add(faUser, faHouse, faArrowLeft, faMusic, faHandPointer)
+library.add(faUser, faHouse, faArrowLeft, faMusic, faHandPointer, faArrowRotateRight)
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('font-awesome-icon', FontAwesomeIcon)

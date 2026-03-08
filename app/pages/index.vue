@@ -27,16 +27,48 @@
 </template>
 
 <script setup>
-useHead({
-  title: 'Inicio'
-})
+import { onMounted, onUnmounted } from 'vue'
 
-const loader = useState('loader')
+// Título de la página
+useHead({title: 'Inicio'})
 
+// Configuración de API (NUXT_PUBLIC_API_BASE en .env)
+const config = useRuntimeConfig()
+const apiBase = config.public.apiBase
+// Variable para almacenar el timer del intervalo
+let timer = null;
+
+// --- MÉTODOS ---
+
+// Función para obtener datos del endpoint de FastAPI.
+const readAPI = async () => {
+  try {
+    // $fetch devuelve los datos directamente, no un objeto { data, error }
+    const response = await $fetch(`${apiBase}/`)
+
+    if (response.data.order === 1) {
+      navigateTo('/cuerdas')
+    } if (response.data.order === 0 || response.data.order === '') {
+      navigateTo('/')
+    } else {
+      console.log("Esperando orden...")
+    }
+  } catch (e) {
+    // Los errores en $fetch se capturan en el catch
+    console.error('Error al conectar con la API:', e)
+    console.log('Error al conectar con FastAPI. Revisa el CORS o la conexión.')
+  }
+}
+
+// Inicialización
 onMounted(() => {
-  // Activar el loader
-  loader.value = true
-  // Desactivar el loader
-  loader.value = false
+  readAPI()
+  // Iniciamos el ciclo de 0.5 segundos para actualizar la frecuencia
+  timer = setInterval(readAPI, 500);
 })
+
+onUnmounted(() => {
+  // Limpiamos el intervalo al salir del componente
+  if (timer) clearInterval(timer);
+});
 </script>
