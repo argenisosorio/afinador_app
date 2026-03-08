@@ -16,6 +16,14 @@ body {
     color: #e07d61 !important;
 }
 
+.text-lightgray {
+    color: gray !important;
+}
+
+.navbar-toggler {
+    background-color: #e07d61;
+}
+
 .main-card {
     background: #201512;
     border: ridge 1px #613529;
@@ -28,6 +36,13 @@ body {
 
 .btn-start-main {
     background-color: #613529;
+    border: none;
+    border-radius: 10px;
+}
+
+.btn-start-main:hover {
+    background-color: #ffffff;
+    color: #201512;
     border: none;
     border-radius: 10px;
 }

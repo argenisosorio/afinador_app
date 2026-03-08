@@ -1,8 +1,8 @@
 <template>
   <div>
-    <hr>
+    <!-- hr -->
     <footer>
-      <p>Desarrollado por CENDITEL</p>
+      <!-- p>Desarrollado por CENDITEL</ -->
     </footer>
   </div>
 </template>

@@ -3,13 +3,22 @@
     <div class="card main-card">
       <div class="card-body text-center">
         <span class="color-orange-app note-icon-main">
-          <font-awesome-icon icon="fa-solid fa-music" />
+          <font-awesome-icon icon="fa-solid fa-music" class="mt-4" />
         </span>
-        <h1 class="text-white">A-CORD-E</h1>
-        <h4 class="text-white">Afinador de Instrumentos de Cuerdas</h4>
-        <button type="button" class="btn btn-primary btn-lg btn-start-main">
-          Presiona 1 para iniciar
+        <h1 class="text-white"><b>A-CORD-E</b></h1>
+        <h4 class="text-lightgray mt-4">Afinador de Instrumentos de Cuerdas</h4>
+        <!-- Botón para entrar al menú -->
+        <button
+          type="button"
+          class="btn btn-primary btn-lg btn-start-main mt-4 mb-5"
+        >
+          <font-awesome-icon
+            icon="fa-solid fa-hand-pointer"
+            class="color-orange-app"
+          />
+          <b>Presiona <span class="color-orange-app">1</span> para iniciar</b>
         </button>
+        <!-- Final del botón para entrar al menú -->
       </div>
     </div>
   </div>
@@ -29,6 +38,3 @@ onMounted(() => {
   loader.value = false
 })
 </script>
-
-<style scoped>
-</style>

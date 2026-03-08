@@ -1,0 +1,3 @@
+- El card pricipal centrarlo en el medio medio.
+- Agregar el favicon de la app.
+- Incorporar los tipos de letra determinados al proyecto.
