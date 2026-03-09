@@ -85,6 +85,7 @@ Notas de desarrollo
 
 Órdenes del backend para navegar en la app:
 
+```
 0 /
 1 /cuerdas
     4 /cuerdas/4
@@ -93,3 +94,4 @@ Notas de desarrollo
         3 /cuerdas/4/banjo
     6 /cuerdas/6
     8 /cuerdas/8
+```
