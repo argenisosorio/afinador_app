@@ -2,4 +2,5 @@
 - Agregar el favicon de la app.
 - Incorporar los tipos de letra determinados al proyecto.
 - Hacer el breadcrumb en el navbar.
+- Actualizar imágenes de la app con las imágenes exportadas en buenas calidad.
 - En el medidor hacer que las variables sean reactivas.
