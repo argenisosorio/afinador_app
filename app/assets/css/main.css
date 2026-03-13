@@ -3,6 +3,20 @@
 
 body {
     background-color: #201512;
+    /* Fuente elegida de Google Fonts (Lexend peso Regular 400) para el cuerpo de todo el sitio */
+    font-family: 'Lexend', sans-serif;
+    font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    /* Fuente elegida de Google Fonts (Lexend peso Bold 700) para resaltar los títulos */
+    font-family: 'Lexend', sans-serif;
+    font-weight: 700;
 }
 
 /* Estilos personalizados de Bootsstrap para el PoC de afinador de guitarra */
@@ -75,6 +89,23 @@ body {
     color: #201512;
     border: none;
     border-radius: 10px;
+}
+
+/* Estilos para enlaces de navegación (Breadcrumb y Navbar) */
+.navbar a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+    /* Color del separador (/) en el Breadcrumb y Navbar */
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Hace que el texto del botón se vuelva marrón al pasar el mouse por encima (hover) */
+.btn-start-reload:hover .navbar-text {
+    color: #613529 !important;
 }
 
 /* Estilos del medidor de frecuencia */
