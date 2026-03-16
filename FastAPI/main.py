@@ -17,6 +17,8 @@ app.add_middleware(
 data = {
     "order": "",
     "frequency": 220.0,
+    # "minFrequency": 210,
+    # "maxFrequency": 230,
     "note": "A",
     "octave": 3,
     "accuracy": 0.87
