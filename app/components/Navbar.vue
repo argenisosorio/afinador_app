@@ -30,11 +30,19 @@
                 <b class="ms-1">Inicio</b>
               </NuxtLink>
             </li>
-            <li v-for="(crumb, index) in breadcrumbs" :key="index" class="breadcrumb-item">
-              <NuxtLink v-if="index !== breadcrumbs.length - 1" :to="crumb.to" class="text-white text-decoration-none">
+            <li
+              v-for="(crumb, index) in breadcrumbs"
+              :key="index" class="breadcrumb-item"
+            >
+              <NuxtLink
+                v-if="index !== breadcrumbs.length - 1"
+                :to="crumb.to" class="text-white text-decoration-none"
+              >
                 <b>{{ crumb.label }}</b>
               </NuxtLink>
-              <b v-else class="text-white-50" aria-current="page">{{ crumb.label }}</b>
+              <b v-else class="text-white-50" aria-current="page">
+                {{ crumb.label }}
+              </b>
             </li>
           </ol>
         </nav>
@@ -44,7 +52,9 @@
             class="btn btn-primary btn-lg btn-start-reload"
           >
             <span class="navbar-text text-white">
-              <font-awesome-icon icon="fa-solid fa-arrow-rotate-right" />
+              <span class="color-orange-app icon-fa-arrow-rotate-right">
+                <font-awesome-icon icon="fa-solid fa-arrow-rotate-right" />
+              </span>
               <b class="ml-2">Reiniciar (Presiona 0)</b>
             </span>
           </button>
@@ -60,13 +70,16 @@ import { useRoute } from 'vue-router'
 
 const route = useRoute()
 
-// Propiedad computada que genera la ruta de migas de pan dinamica (breadcrumb)
+/* Propiedad computada que genera la ruta del breadcrumb y la etiqueta a mostrar
+*  en función de la URL actual.
+*/
 const breadcrumbs = computed(() => {
   // Obtenemos los segmentos de la URL actual
   const pathArray = route.path.split('/').filter(p => p)
   const crumbs = []
   let path = ''
 
+  // Iteramos sobre cada segmento para construir la ruta y la etiqueta
   pathArray.forEach((segment) => {
     path += `/${segment}`
     // Reemplazamos guiones por espacios y capitalizamos la primera letra
@@ -78,6 +91,7 @@ const breadcrumbs = computed(() => {
         label = 'Instrumentos de Cuerdas'
     }
 
+    // Agregamos el objeto de breadcrumb al array.
     crumbs.push({
       to: path,
       label: label

@@ -135,7 +135,8 @@ const readAPI = async () => {
       navigateTo('/cuerdas/6')
     } if (response.data.order === 18) {
       navigateTo('/cuerdas/8')
-    } if (response.data.order === 0 || response.data.order === '') {
+    } if (response.data.order === 0) {
+    // } if (response.data.order === 0 || response.data.order === '') {
       navigateTo('/')
     } else {
       console.log("Esperando orden...")

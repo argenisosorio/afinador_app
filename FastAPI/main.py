@@ -15,7 +15,7 @@ app.add_middleware(
 
 # Variable global para mantener el estado del afinador
 data = {
-    "order": 0,
+    "order": "",
     "frequency": 220.0,
     "note": "A",
     "octave": 3,

@@ -122,7 +122,8 @@ const readAPI = async () => {
       navigateTo('/cuerdas/4/ukelele')
     } if (response.data.order === 143) {
       navigateTo('/cuerdas/4/banjo')
-    } if (response.data.order === 0 || response.data.order === '') {
+    } if (response.data.order === 0) {
+    // } if (response.data.order === 0 || response.data.order === '') {
       navigateTo('/')
     } else {
       console.log("Esperando orden...")
