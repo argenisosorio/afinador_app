@@ -6,7 +6,11 @@
           <GoBack />
           <h1>Cuatro Venezolano</h1>
         </div>
-        <p class="subtitle">Nota {{ currentNote }} - Frecuencia ideal: 220 Hz</p>
+        <p class="subtitle">Nota: {{ currentNote }} ({{ nomenclatureNote }})</p>
+        <p class="subtitle">Frecuencia ideal: {{ idealFrequency }} Hz</p>
+        <p class="subtitle">Rango min. de frecuencia: {{ minFrequency }} Hz</p>
+        <p class="subtitle">Rango max. de frecuencia: {{ maxFrequency }} Hz</p>
+        <p class="subtitle">Frecuencia actual: {{ currentFrequency }} Hz</p>
       </header>
 
       <div class="tuner-container">
@@ -37,8 +41,12 @@ const apiBase = config.public.apiBase
 
 // --- ESTADO REACTIVO ---
 const tunerCanvas = ref(null)
-const currentFrequency = ref(210)
-const currentNote = ref('A')
+const currentNote = ref('')
+const nomenclatureNote = ref('')
+const currentFrequency = ref(0)
+const idealFrequency = ref(0)
+const minFrequency = ref(0)
+const maxFrequency = ref(0)
 
 const tunerConfig = {
   targetFrequency: 220,
@@ -188,6 +196,54 @@ const readAPI = async () => {
       if (note) currentNote.value = note
       // Actualizamos la variable frequency
       if (frequency) updateFrequency(frequency)
+
+      // Mapeo de frecuencias ideales para el Cuatro Venezolano
+      const noteMap = {
+        'A': 220, // La
+        'D': 294, // Re
+        'F': 370, // Fa#
+        'B': 247, // Si
+        '': ''
+      }
+
+      const target = noteMap[note]
+      idealFrequency.value = target || ''
+
+      // Lógica de Rangos Dinámicos (minFrequency y maxFrequency)
+      if (target) {
+        // Establecemos el margen visual del afinador (±10 Hz)
+        minFrequency.value = target - 10
+        maxFrequency.value = target + 10
+
+        /* Actualizar el objeto tunerConfig para que el Canvas sepa cuáles son
+         * los nuevos límites.
+         */
+        tunerConfig.targetFrequency = target
+        tunerConfig.minFrequency = target - 10
+        tunerConfig.maxFrequency = target + 10
+      } if (target == '') {
+        // Establecemos el margen visual del afinador (±10 Hz)
+        tunerConfig.targetFrequency = target
+        minFrequency.value = 0
+        maxFrequency.value = 0
+      }
+
+      // Mapeo de nomenclaturas de notas.
+      const nomenclature_noteMap = {
+        'A': 'LA',
+        'D': 'RE',
+        'F': 'FA#',
+        'B': 'SI',
+        '': ''
+      }
+
+      /* Asignamos el valor del mapa a la frecuencia ideal o vacío si no existe
+       * la nota.
+       */
+      idealFrequency.value = noteMap[note] || ''
+
+      // Asignamos el valor del mapa o vacío si no existe la nota.
+      nomenclatureNote.value = nomenclature_noteMap[note] || ''
     }
   } catch (e) {
     // Los errores en $fetch se capturan en el catch

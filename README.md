@@ -90,3 +90,19 @@ Notas de desarrollo
 -2 Nivel se espera: 4,6,8,0
 -3 Nivel se espera: 41,42,43,0
 ```
+
+El json que se va a recibir del API será:
+
+{
+  "data":{
+    "order":1,
+    "frequency":210.0,
+    "note":"A"
+  }
+}
+
+-Las notas que se van a recibir son:
+    -Nota A (LA)
+    -Nota D (RE)
+    -Nota F = F# (Fa#)
+    -Nota B (Si)

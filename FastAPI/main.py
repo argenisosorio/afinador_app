@@ -16,35 +16,9 @@ app.add_middleware(
 # Variable global para mantener el estado del afinador
 data = {
     "order": "",
-    "frequency": 220.0,
+    "frequency": 220,
     "note": "A",
 }
-
-async def update_frequency():
-    """Tarea en segundo plano que incrementa la frecuencia de 2 en 2"""
-    # Inicializamos en 210
-    data["frequency"] = 210.0
-
-    while True:
-        # Esperamos 0.5 segundo antes de la siguiente actualización
-        await asyncio.sleep(0.5)
-
-        # Calculamos el siguiente valor sumando 5
-        nueva_frecuencia = data["frequency"] + 2
-
-        # Si supera los 230, reiniciamos a 210
-        if nueva_frecuencia > 230:
-            data["frequency"] = 210.0
-        else:
-            data["frequency"] = nueva_frecuencia
-
-        print(f"Frecuencia actualizada: {data['frequency']}") # Debug en consola
-
-# Decoramos la función de inicio para que se ejecute al arrancar el servidor
-@app.on_event("startup")
-async def startup_event():
-    # Iniciamos la tarea sin bloquear el inicio del servidor
-    asyncio.create_task(update_frequency())
 
 # Decorador para manejar la ruta GET en /api
 @app.get("/api")
