@@ -17,11 +17,7 @@ app.add_middleware(
 data = {
     "order": "",
     "frequency": 220.0,
-    # "minFrequency": 210,
-    # "maxFrequency": 230,
     "note": "A",
-    "octave": 3,
-    "accuracy": 0.87
 }
 
 async def update_frequency():
@@ -41,9 +37,6 @@ async def update_frequency():
             data["frequency"] = 210.0
         else:
             data["frequency"] = nueva_frecuencia
-
-        # Opcional: actualizar el accuracy para que varíe un poco
-        data["accuracy"] = round(random.uniform(0.9, 0.99), 2)
 
         print(f"Frecuencia actualizada: {data['frequency']}") # Debug en consola
 

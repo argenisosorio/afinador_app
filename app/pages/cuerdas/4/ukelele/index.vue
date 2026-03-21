@@ -14,7 +14,7 @@
 import { onMounted, onUnmounted } from 'vue'
 
 // Título de la página
-useHead({title: 'Banjo'})
+useHead({title: 'Ukelele'})
 
 // Configuración de API (NUXT_PUBLIC_API_BASE en .env)
 const config = useRuntimeConfig()

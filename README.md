@@ -86,12 +86,7 @@ Notas de desarrollo
 Órdenes del backend para navegar en la app:
 
 ```
-0 /
-1 /cuerdas
-    4 /cuerdas/4
-        1 /cuerdas/4/cuatro
-        2 /cuerdas/4/ukelele
-        3 /cuerdas/4/banjo
-    6 /cuerdas/6
-    8 /cuerdas/8
+-1 Nivel se espera: 1,0
+-2 Nivel se espera: 4,6,8,0
+-3 Nivel se espera: 41,42,43,0
 ```

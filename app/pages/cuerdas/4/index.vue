@@ -116,17 +116,16 @@ const readAPI = async () => {
     // $fetch devuelve los datos directamente, no un objeto { data, error }
     const response = await $fetch(`${apiBase}/`)
 
-    if (response.data.order === 141) {
+    if (response.data.order === 41 || response.data.order === '41') {
       navigateTo('/cuerdas/4/cuatro')
-    } if (response.data.order === 142) {
+    } if (response.data.order === 42 || response.data.order === '42') {
       navigateTo('/cuerdas/4/ukelele')
-    } if (response.data.order === 143) {
+    } if (response.data.order === 43 || response.data.order === '43') {
       navigateTo('/cuerdas/4/banjo')
-    } if (response.data.order === 0) {
-    // } if (response.data.order === 0 || response.data.order === '') {
+    } if (response.data.order === 0 || response.data.order === '0') {
       navigateTo('/')
     } else {
-      console.log("Esperando orden...")
+      // console.log("Esperando orden...")
     }
   } catch (e) {
     // Los errores en $fetch se capturan en el catch

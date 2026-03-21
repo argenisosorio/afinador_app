@@ -101,7 +101,7 @@
             icon="fa-solid fa-hand-pointer"
             class="color-orange-app"
           />
-          <b>Presiona <span class="color-orange-app">4, 5 o 8</span> en tu teclado</b>
+          <b>Presiona <span class="color-orange-app">4, 6 o 8</span> en tu teclado</b>
         </button>
         <!-- Final del botón para entrar al menú -->
       </div>
@@ -129,17 +129,16 @@ const readAPI = async () => {
     // $fetch devuelve los datos directamente, no un objeto { data, error }
     const response = await $fetch(`${apiBase}/`)
 
-    if (response.data.order === 14) {
+    if (response.data.order === 4 || response.data.order === '4') {
       navigateTo('/cuerdas/4')
-    } if (response.data.order === 16) {
+    } if (response.data.order === 6 || response.data.order === '6') {
       navigateTo('/cuerdas/6')
-    } if (response.data.order === 18) {
+    } if (response.data.order === 8 || response.data.order === '8') {
       navigateTo('/cuerdas/8')
-    } if (response.data.order === 0) {
-    // } if (response.data.order === 0 || response.data.order === '') {
+    } if (response.data.order === 0 || response.data.order === '0') {
       navigateTo('/')
     } else {
-      console.log("Esperando orden...")
+      // console.log("Esperando orden...")
     }
   } catch (e) {
     // Los errores en $fetch se capturan en el catch

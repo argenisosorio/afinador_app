@@ -6,8 +6,7 @@
           <GoBack />
           <h1>Cuatro Venezolano</h1>
         </div>
-        <!-- tunerConfig.targetFrequency es reactivo, se actualizará automáticamente si cambia su valor -->
-        <p class="subtitle">Nota A (LA) - Frecuencia ideal: {{ tunerConfig.targetFrequency }} Hz</p>
+        <p class="subtitle">Nota {{ currentNote }} - Frecuencia ideal: 220 Hz</p>
       </header>
 
       <div class="tuner-container">
@@ -25,7 +24,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, onUnmounted, computed, watch } from 'vue'
+import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
 
 // Título de la página
 useHead({ title: 'Cuatro' })
@@ -39,19 +38,16 @@ const apiBase = config.public.apiBase
 // --- ESTADO REACTIVO ---
 const tunerCanvas = ref(null)
 const currentFrequency = ref(210)
-const jsonText = ref('')
+const currentNote = ref('A')
 
-// tunerConfig es un objeto reactivo. Al usar reactive(), Vue rastreará
-// los cambios en cualquiera de sus propiedades (como targetFrequency)
-// y actualizará automáticamente la interfaz de usuario donde se utilicen.
-const tunerConfig = reactive({
+const tunerConfig = {
   targetFrequency: 220,
   minFrequency: 210,
   maxFrequency: 230,
   tolerance: 0.5,
   warningRange: 3,
   majorTicks: 10
-})
+}
 
 // --- COMPUTED PROPERTIES (Lógica visual) ---
 const deviation = computed(() => currentFrequency.value - tunerConfig.targetFrequency)
@@ -171,23 +167,27 @@ watch(currentFrequency, (newFreq) => {
 })
 
 // --- MÉTODOS ---
+
 const updateFrequency = (freq) => {
-  currentFrequency.value = Math.min(Math.max(freq, tunerConfig.minFrequency), tunerConfig.maxFrequency)
+  currentFrequency.value = Math.min(Math.max(freq, tunerConfig.minFrequency),
+    tunerConfig.maxFrequency)
 }
 
 // Función para obtener datos del endpoint de FastAPI.
-const fetchTunerData = async () => {
+const readAPI = async () => {
   try {
     // $fetch devuelve los datos directamente, no un objeto { data, error }
     const response = await $fetch(`${apiBase}/`)
 
-    if (response) {
-      // Actualiza el editor de texto y la frecuencia
-      jsonText.value = JSON.stringify(response, null, 2)
-
+    if (response && response.data) {
       // Accedemos directamente a la respuesta
-      const freq = response.data?.frequency || response.frequency
-      if (freq) updateFrequency(freq)
+      const note = response.data.note
+      const frequency = response.data.frequency
+
+      // Actualizamos la variable note
+      if (note) currentNote.value = note
+      // Actualizamos la variable frequency
+      if (frequency) updateFrequency(frequency)
     }
   } catch (e) {
     // Los errores en $fetch se capturan en el catch
@@ -196,25 +196,17 @@ const fetchTunerData = async () => {
   }
 }
 
-// Función que maneja el "Short Polling" recursivo (setTimeout en lugar de setInterval).
-// A diferencia de setInterval, esto asegura que la próxima petición solo se programe
-// UNA VEZ que la petición HTTP actual haya terminado, evitando la saturación y
-// acumulación de llamadas en la red si el servidor de FastAPI tarda en responder.
-const pollData = async () => {
-  await fetchTunerData() // Esperamos a que la petición termine y procese los datos
-  timer = setTimeout(pollData, 500) // Se programa la siguiente llamada en 500ms
-}
-
 // Inicialización
 onMounted(() => {
   drawTunerMeter(currentFrequency.value)
-  // Iniciamos el ciclo recursivo
-  pollData()
+  // Carga automática inicial de readAPI
+  readAPI()
+  // Iniciamos el ciclo de 0.5 segundos para actualizar la frecuencia
+  timer = setInterval(readAPI, 500);
 })
 
 onUnmounted(() => {
-  // Limpiamos el temporizador pendiente al salir del componente
-  // para evitar peticiones "fantasma" en el fondo y ahorrar en memoria.
-  if (timer) clearTimeout(timer);
+  // Limpiamos el intervalo al salir del componente
+  if (timer) clearInterval(timer);
 });
 </script>
