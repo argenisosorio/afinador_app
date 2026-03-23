@@ -17,17 +17,34 @@
               type="button"
               class="btn btn-primary btn-lg btn-start-detect mt-4"
             >
-              <span class="text-lightgray">
-                <font-awesome-icon icon="fa-solid fa-music" />
-                No se ha detectado una cuerda
-              </span>
+              <div v-if="currentNote === ''">
+                <span class="text-lightgray">
+                  <font-awesome-icon icon="fa-solid fa-music" />
+                  No se ha detectado una cuerda
+                </span>
+              </div>
+
+              <div v-else>
+                <span class="text-white">
+                  <span class="color-orange-app">
+                    <font-awesome-icon icon="fa-solid fa-music" />
+                  </span>
+                  Nota: {{ currentNote }} ({{ nomenclatureNote }})
+                </span>
+                <br>
+                <span class="text-white">
+                  Cuerda detectada
+                </span>
+              </div>
             </button>
-            <img
-              src="/images/cuerdas/4/cuatro/cuerdas_cuatro/Cuatro_Inactivo.png"
-              alt="star"
-              class="img-fluid mt-3 mb-3"
-              width="70%"
-            >
+            <div>
+              <img
+                src="/images/cuerdas/4/cuatro/cuerdas_cuatro/Cuatro_Inactivo.png"
+                alt="star"
+                class="img-fluid mt-3 mb-3"
+                width="70%"
+              >
+            </div>
           </div>
         </div>
       </div>
@@ -37,10 +54,6 @@
             <div class="poc-wrapper">
               <div class="poc-container">
                 <header>
-                  <div class="header-title">
-                    <GoBack />
-                    <h1>Cuatro Venezolano</h1>
-                  </div>
                   <p class="subtitle">Nota: {{ currentNote }} ({{ nomenclatureNote }})</p>
                   <p class="subtitle">Frecuencia ideal: {{ idealFrequency }} Hz</p>
                   <p class="subtitle">Rango min. de frecuencia: {{ minFrequency }} Hz</p>
