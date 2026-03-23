@@ -1,29 +1,88 @@
 <template>
-  <div class="poc-wrapper">
-    <div class="poc-container">
-      <header>
-        <div class="header-title">
-          <GoBack />
-          <h1>Cuatro Venezolano</h1>
+  <div class="container">
+    <h1 class="text-center text-white mt-4 mb-3">
+      <span class="color-orange-app">
+        Toca una cuerda
+      </span>
+      en tu instrumento
+    </h1>
+    <h5 class="text-lightgray text-center mt-4 mb-5">
+      Toca la cuerda de tu elección y observa cómo se afina automáticamente
+    </h5>
+    <div class="row mb-4 mt-4">
+      <div class="col-6 col-sm-6">
+        <div class="card main-card">
+          <div class="card-body text-center text-white">
+            <button
+              type="button"
+              class="btn btn-primary btn-lg btn-start-detect mt-4"
+            >
+              <span class="text-lightgray">
+                <font-awesome-icon icon="fa-solid fa-music" />
+                No se ha detectado una cuerda
+              </span>
+            </button>
+            <img
+              src="/images/cuerdas/4/cuatro/cuerdas_cuatro/Cuatro_Inactivo.png"
+              alt="star"
+              class="img-fluid mt-3 mb-3"
+              width="70%"
+            >
+          </div>
         </div>
-        <p class="subtitle">Nota: {{ currentNote }} ({{ nomenclatureNote }})</p>
-        <p class="subtitle">Frecuencia ideal: {{ idealFrequency }} Hz</p>
-        <p class="subtitle">Rango min. de frecuencia: {{ minFrequency }} Hz</p>
-        <p class="subtitle">Rango max. de frecuencia: {{ maxFrequency }} Hz</p>
-        <p class="subtitle">Frecuencia actual: {{ currentFrequency }} Hz</p>
-      </header>
+      </div>
+      <div class="col-6 col-sm-6">
+        <div class="card main-card">
+          <div class="card-body text-center text-white">
+            <div class="poc-wrapper">
+              <div class="poc-container">
+                <header>
+                  <div class="header-title">
+                    <GoBack />
+                    <h1>Cuatro Venezolano</h1>
+                  </div>
+                  <p class="subtitle">Nota: {{ currentNote }} ({{ nomenclatureNote }})</p>
+                  <p class="subtitle">Frecuencia ideal: {{ idealFrequency }} Hz</p>
+                  <p class="subtitle">Rango min. de frecuencia: {{ minFrequency }} Hz</p>
+                  <p class="subtitle">Rango max. de frecuencia: {{ maxFrequency }} Hz</p>
+                  <p class="subtitle">Frecuencia actual: {{ currentFrequency }} Hz</p>
+                </header>
 
-      <div class="tuner-container">
-        <canvas ref="tunerCanvas" width="400" height="480" />
-        <div class="frequency-display" :style="{ color: displayColor }">
-          {{ currentFrequency.toFixed(1) }} <span class="unit-text">Hz</span>
-        </div>
-        <div class="note-name">A</div>
-        <div class="tuning-status" :style="{ background: statusBg }">
-          {{ tuningStatusText }}
+                <div class="tuner-container">
+                  <canvas ref="tunerCanvas" width="400" height="480" />
+                  <div class="frequency-display" :style="{ color: displayColor }">
+                    {{ currentFrequency.toFixed(1) }} <span class="unit-text">Hz</span>
+                  </div>
+                  <div class="note-name">A</div>
+                  <div class="tuning-status" :style="{ background: statusBg }">
+                    {{ tuningStatusText }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    <!-- Botón para ir a inicio -->
+    <div class="text-center">
+      <NuxtLink to="/" class="navbar-brand">
+        <button
+          type="button"
+          class="btn btn-primary btn-lg btn-start-main mt-4 mb-4"
+        >
+          <font-awesome-icon
+            icon="fa-solid fa-hand-pointer"
+            class="color-orange-app"
+          />
+          <b>
+            Presiona <span class="color-orange-app">0</span> en tu teclado para
+            <span class="color-orange-app">volver a inicio</span>
+          </b>
+        </button>
+      </NuxtLink>
+    </div>
+    <!-- Final del botón para ir a inicio -->
   </div>
 </template>
 
@@ -65,7 +124,7 @@ const deviation = computed(() => {
 })
 
 const tuningStatusText = computed(() => {
-  if (!currentNote.value) return 'ESPERANDO SEÑAL...'
+  if (!currentNote.value) return 'EN ESPERA...'
   const absDev = Math.abs(deviation.value)
   if (absDev <= tunerConfig.tolerance) return '✓ AFINADO'
   if (absDev <= tunerConfig.warningRange) return deviation.value < 0 ? '↓ BAJO (b)' : '↑ ALTO (#)'

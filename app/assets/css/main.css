@@ -65,6 +65,19 @@ h6 {
     border-radius: 10px;
 }
 
+.btn-start-detect {
+    background-color: #613529;
+    border: none;
+    border-radius: 10px;
+}
+
+.btn-start-detect:hover {
+    background-color: #ffffff;
+    color: #201512;
+    border: none;
+    border-radius: 10px;
+}
+
 .btn-start-reload {
     background-color: #613529;
     border: none;
