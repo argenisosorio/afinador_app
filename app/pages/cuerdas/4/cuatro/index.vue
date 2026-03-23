@@ -198,6 +198,12 @@ const readAPI = async () => {
     const response = await $fetch(`${apiBase}/`)
 
     if (response && response.data) {
+
+      // Si orden es 0 volver al inicio de la app.
+      if (response.data.order === 0 || response.data.order === '0') {
+        navigateTo('/')
+      }
+
       const note = response.data.note
       const frequency = response.data.frequency
 
