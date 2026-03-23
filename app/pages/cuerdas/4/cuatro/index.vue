@@ -37,13 +37,13 @@
                 </span>
               </div>
             </button>
-            <div>
+            <div class="mb-3 text-center">
               <img
-                src="/images/cuerdas/4/cuatro/cuerdas_cuatro/Cuatro_Inactivo.png"
-                alt="star"
+                :src="sourceImage"
+                alt="Estado de afinación"
                 class="img-fluid mt-3 mb-3"
                 width="70%"
-              >
+              />
             </div>
           </div>
         </div>
@@ -128,6 +128,25 @@ const tunerConfig = {
   warningRange: 3,
   majorTicks: 10
 }
+
+/**
+ * Propiedad computada para determinar la imagen a mostrar basada en currentNote.
+ */
+const sourceImage = computed(() => {
+  if (currentNote.value === 'A') {
+    return '/images/cuerdas/4/cuatro/cuerdas_cuatro/A.png'
+  } else if (currentNote.value === 'D') {
+    return '/images/cuerdas/4/cuatro/cuerdas_cuatro/D.png'
+  } else if (currentNote.value === 'F') {
+    return '/images/cuerdas/4/cuatro/cuerdas_cuatro/F.png'
+  } else if (currentNote.value === 'B') {
+    return '/images/cuerdas/4/cuatro/cuerdas_cuatro/B.png'
+  } else if (currentNote.value === '') {
+    return '/images/cuerdas/4/cuatro/cuerdas_cuatro/0.png'
+  } else {
+    return '/images/cuerdas/4/cuatro/cuerdas_cuatro/0.png'
+  }
+})
 
 // --- COMPUTED PROPERTIES (Lógica visual) ---
 const deviation = computed(() => {
