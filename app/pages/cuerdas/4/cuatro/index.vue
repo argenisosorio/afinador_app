@@ -58,9 +58,14 @@ const tunerConfig = {
 }
 
 // --- COMPUTED PROPERTIES (Lógica visual) ---
-const deviation = computed(() => currentFrequency.value - tunerConfig.targetFrequency)
+const deviation = computed(() => {
+  // Si no hay nota o frecuencia, la desviación es 0 para reposo
+  if (!currentNote.value || currentFrequency.value === 0) return 0
+  return currentFrequency.value - tunerConfig.targetFrequency
+})
 
 const tuningStatusText = computed(() => {
+  if (!currentNote.value) return 'ESPERANDO SEÑAL...'
   const absDev = Math.abs(deviation.value)
   if (absDev <= tunerConfig.tolerance) return '✓ AFINADO'
   if (absDev <= tunerConfig.warningRange) return deviation.value < 0 ? '↓ BAJO (b)' : '↑ ALTO (#)'
@@ -68,6 +73,7 @@ const tuningStatusText = computed(() => {
 })
 
 const displayColor = computed(() => {
+  if (!currentNote.value) return '#718096' // Color neutro en reposo
   const absDev = Math.abs(deviation.value)
   if (absDev <= tunerConfig.tolerance) return '#48bb78'
   if (absDev <= tunerConfig.warningRange) return '#f6ad55'
@@ -95,8 +101,13 @@ function drawTunerMeter(frequency) {
 
   // Arco frecuencia
   const frequencyRange = tunerConfig.maxFrequency - tunerConfig.minFrequency
-  const normalizedFreq = (frequency - tunerConfig.minFrequency) / frequencyRange
-  const freqAngle = startAngle + normalizedFreq * (endAngle - startAngle)
+  // Evitar división por cero si el rango es 0
+  const safeRange = frequencyRange === 0 ? 1 : frequencyRange
+  const normalizedFreq = (frequency - tunerConfig.minFrequency) / safeRange
+
+  // Limitar el ángulo para que la aguja no de vueltas locas en reposo
+  const constrainedFreq = Math.max(0, Math.min(1, normalizedFreq))
+  const freqAngle = startAngle + constrainedFreq * (endAngle - startAngle)
 
   ctx.beginPath()
   ctx.arc(centerX, centerY, radius, startAngle, freqAngle)
@@ -134,8 +145,8 @@ function drawTunerMeter(frequency) {
     )
   }
 
-  // Marca especial para 220 Hz (target)
-  const targetAngle = startAngle + ((tunerConfig.targetFrequency - tunerConfig.minFrequency) / frequencyRange) * (endAngle - startAngle)
+  // Marca especial para el target
+  const targetAngle = startAngle + ((tunerConfig.targetFrequency - tunerConfig.minFrequency) / safeRange) * (endAngle - startAngle)
 
   ctx.beginPath()
   ctx.moveTo(
@@ -147,7 +158,7 @@ function drawTunerMeter(frequency) {
     centerY + (radius - 40) * Math.sin(targetAngle)
   )
   ctx.lineWidth = 3
-  ctx.strokeStyle = '#667eea'
+  ctx.strokeStyle = currentNote.value ? '#667eea' : 'transparent'
   ctx.stroke()
 
   // Aguja
@@ -184,18 +195,31 @@ const updateFrequency = (freq) => {
 // Función para obtener datos del endpoint de FastAPI.
 const readAPI = async () => {
   try {
-    // $fetch devuelve los datos directamente, no un objeto { data, error }
     const response = await $fetch(`${apiBase}/`)
 
     if (response && response.data) {
-      // Accedemos directamente a la respuesta
       const note = response.data.note
       const frequency = response.data.frequency
 
-      // Actualizamos la variable note
-      if (note) currentNote.value = note
-      // Actualizamos la variable frequency
-      if (frequency) updateFrequency(frequency)
+      // Lógica de "Reposo": Si no hay nota o frecuencia, reseteamos a 0
+      if (!note || !frequency) {
+        currentNote.value = ''
+        currentFrequency.value = 0
+        nomenclatureNote.value = ''
+        idealFrequency.value = 0
+        minFrequency.value = 0
+        maxFrequency.value = 0
+        // Reseteamos config para que el dibujo se mantenga en el inicio
+        tunerConfig.minFrequency = 0
+        tunerConfig.maxFrequency = 100
+        tunerConfig.targetFrequency = 0
+        drawTunerMeter(0)
+        return // Salimos de la función
+      }
+
+      // Si hay datos, procedemos con la actualización normal
+      currentNote.value = note
+      updateFrequency(frequency)
 
       // Mapeo de frecuencias ideales para el Cuatro Venezolano
       const noteMap = {
@@ -203,29 +227,18 @@ const readAPI = async () => {
         'D': 294, // Re
         'F': 370, // Fa#
         'B': 247, // Si
-        '': ''
       }
 
-      const target = noteMap[note]
-      idealFrequency.value = target || ''
+      const target = noteMap[note] || 0
+      idealFrequency.value = target
 
-      // Lógica de Rangos Dinámicos (minFrequency y maxFrequency)
       if (target) {
-        // Establecemos el margen visual del afinador (±10 Hz)
         minFrequency.value = target - 10
         maxFrequency.value = target + 10
 
-        /* Actualizar el objeto tunerConfig para que el Canvas sepa cuáles son
-         * los nuevos límites.
-         */
         tunerConfig.targetFrequency = target
         tunerConfig.minFrequency = target - 10
         tunerConfig.maxFrequency = target + 10
-      } if (target == '') {
-        // Establecemos el margen visual del afinador (±10 Hz)
-        tunerConfig.targetFrequency = target
-        minFrequency.value = 0
-        maxFrequency.value = 0
       }
 
       // Mapeo de nomenclaturas de notas.
@@ -234,21 +247,13 @@ const readAPI = async () => {
         'D': 'RE',
         'F': 'FA#',
         'B': 'SI',
-        '': ''
       }
-
-      /* Asignamos el valor del mapa a la frecuencia ideal o vacío si no existe
-       * la nota.
-       */
-      idealFrequency.value = noteMap[note] || ''
 
       // Asignamos el valor del mapa o vacío si no existe la nota.
       nomenclatureNote.value = nomenclature_noteMap[note] || ''
     }
   } catch (e) {
-    // Los errores en $fetch se capturan en el catch
     console.error('Error al conectar con la API:', e)
-    console.log('Error al conectar con FastAPI. Revisa el CORS o la conexión.')
   }
 }
 
