@@ -43,7 +43,7 @@
                 alt="Estado de afinación"
                 class="img-fluid mt-3 mb-3"
                 width="70%"
-              />
+              >
             </div>
           </div>
         </div>

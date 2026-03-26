@@ -7,7 +7,7 @@ export default defineNuxtConfig({
   nitro: {
     devProxy: {
       '/api': {
-        target: 'http://192.168.4.1/api', // Tu IP Real del backend
+        target: (process as any).env.NUXT_PUBLIC_API_BASE,
         changeOrigin: true,
         prependPath: true,
       }
