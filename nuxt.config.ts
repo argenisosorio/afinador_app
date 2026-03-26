@@ -1,26 +1,40 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
-  devtools: { enabled: false },
 
-  runtimeConfig: {
-    // Las variables dentro de 'public' son accesibles desde el navegador
-    public: {
-      apiBase: process.env.NUXT_PUBLIC_API_BASE || 'http://127.0.0.1:8000/api'
+  // 1. Configuración de Proxy con Nitro
+  // Esto hace que las peticiones a '/api' sean redirigidas internamente al backend
+  nitro: {
+    devProxy: {
+      '/api': {
+        target: 'http://192.168.4.1/api', // Tu IP Real del backend
+        changeOrigin: true,
+        prependPath: true,
+      }
     }
   },
 
-  // Configuración de etiquetas Meta Globales
+  devtools: { enabled: false },
+
+  // 2. Variables de configuración accesibles en la app
+  runtimeConfig: {
+    public: {
+      // Al usar el proxy, la URL base para el frontend es simplemente '/api'
+      apiBase: '/api'
+    }
+  },
+
+  // 3. Configuración de etiquetas Meta Globales (SEO y Autoría)
   app: {
     head: {
       htmlAttrs: {
-        lang: 'es' // Define el idioma del sitio
+        lang: 'es'
       },
-      title: 'My Nuxt app', // Título por defecto
+      title: 'SINIDOT V2 - Sistema de Gestión',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { hid: 'description', content: 'Nuxt 4 examples' },
+        { hid: 'description', content: 'Sistema Integral de Donación y Trasplante' },
         { name: 'format-detection', content: 'telephone=no' },
         { name: 'author', content: 'Ing. Argenis Osorio' }
       ],
@@ -33,11 +47,13 @@ export default defineNuxtConfig({
     }
   },
 
+  // 4. Estilos globales y Iconos
   css: [
     'assets/css/main.css',
     '@fortawesome/fontawesome-svg-core/styles.css'
   ],
 
+  // 5. Módulos y Linter
   modules: ['@nuxt/eslint'],
 
   eslint: {
